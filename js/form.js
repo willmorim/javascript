@@ -7,7 +7,17 @@ botaoAdicionar.addEventListener("click", function(event) {
 
     //chama a função que pega os dados do paciente
     var paciente = obtemPacienteDoFormulario(form);
-    console.log(paciente);
+
+    var pacienteTr = montaTr(paciente);
+
+    //selecionando a tabela pelo id
+    var tabela = document.querySelector("#tabela-pacientes");
+
+    //inserindo o tr na tabela com o appendChild
+    tabela.appendChild(pacienteTr);
+
+    //reseta os dados dos campos para inserir o paciente no formulario
+    form.reset();
 
     //função que pega os dados do paciente atravez de um objeto(var paciente)
     function obtemPacienteDoFormulario(form) {
@@ -23,33 +33,30 @@ botaoAdicionar.addEventListener("click", function(event) {
         return paciente
     }
 
-    //cria uma tr no document com o createElement
-    var pacienteTr = document.createElement("tr");
+    //recebe um paciente como parametro e monta uma TR
+    function montaTr(paciente) {
 
-    //cria os td's que ficarão dentro da tr
-    var nomeTd = document.createElement("td");
-    var pesoTd = document.createElement("td");
-    var alturaTd = document.createElement("td");
-    var gorduraTd = document.createElement("td");
-    var imcTd = document.createElement("td");
+        //cria uma tr no document com o createElement
+        var pacienteTr = document.createElement("tr");
 
-    //colocando os valores digitados no form para o td
-    nomeTd.textContent = nome;
-    pesoTd.textContent = peso;
-    alturaTd.textContent = altura;
-    gorduraTd.textContent = gordura;
-    imcTd.textContent = calculaImc(peso, altura);
+        pacienteTr.classList.add("paciente");
 
-    //colocando os td's dentro da tr
-    pacienteTr.appendChild(nomeTd);
-    pacienteTr.appendChild(pesoTd);
-    pacienteTr.appendChild(alturaTd);
-    pacienteTr.appendChild(gorduraTd);
-    pacienteTr.appendChild(imcTd);
+        //colocando os td's dentro da tr, e chamando a função montaTd que passa o dado do paciente e a classe desse "dado"
+        pacienteTr.appendChild(montaTd(paciente.nome, "info-nome"));
+        pacienteTr.appendChild(montaTd(paciente.peso, "info-peso"));
+        pacienteTr.appendChild(montaTd(paciente.altura, "info-altura"));
+        pacienteTr.appendChild(montaTd(paciente.gordura, "info-gordura"));
+        pacienteTr.appendChild(montaTd(paciente.imc, "info-imc"));
 
-    //selecionando a tabela pelo id
-    var tabela = document.querySelector("#tabela-pacientes");
+        return pacienteTr;
+    }
 
-    //inserindo o tr na tabela com o appendChild
-    tabela.appendChild(pacienteTr);
+    //cria uma TD e adiciona um dado e uma classe
+    function montaTd(dado, classe) {
+        var td = document.createElement("td");
+        td.textContent = dado;
+        td.classList.add(classe);
+
+        return td;
+    }
 });
