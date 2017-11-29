@@ -8,8 +8,12 @@ botaoAdicionar.addEventListener("click", function(event) {
     //chama a função que pega os dados do paciente
     var paciente = obtemPacienteDoFormulario(form);
 
+
     var pacienteTr = montaTr(paciente);
 
+
+    //verifica se os dados do paciente é valido, caso invalido
+    // ele não adiciona na tabela e da uma mensagem de erro
     if(!validaPaciente(paciente)){
         console.log("paciente invalido");
         return;
@@ -65,7 +69,7 @@ botaoAdicionar.addEventListener("click", function(event) {
         return td;
     }
 
-
+    //testa os dados do paciente para ver se é valido
     function validaPaciente(paciente){
         if(validaPeso(paciente.peso)){
             return true;
