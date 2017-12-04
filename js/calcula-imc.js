@@ -15,7 +15,7 @@ for (var i = 0; i < pacientes.length; i++) {
 
     //recebe os dados do paciente atraves das funções atribuidas
     var pesoEhValido = validaPeso(peso);
-    var alturaEhValida = validaaltura(altura);
+    var alturaEhValida = validaAltura(altura);
 
 
     //caso invalido entra no if e da erro
@@ -49,7 +49,7 @@ for (var i = 0; i < pacientes.length; i++) {
     }
 
     //valida os dados do paciente
-    function validaaltura(altura) {
+    function validaAltura(altura) {
         if (altura >= 0 && altura <= 3.0) {
             return true;
         } else {
